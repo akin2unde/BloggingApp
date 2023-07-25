@@ -1,0 +1,24 @@
+﻿@model List<BloggingApp.Models.Blog>
+@{
+    ViewData["Title"] = "Home Page";
+}
+    <div class="text-center">
+    <h1>Posts</h1>
+    </div>
+    @for(var i=0; i<Model.Count;i++){
+    var element = Model[i];
+    <div class="card">
+        <div class="card-header">
+            @element.Title
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">@element.UserMailAddress</h5>
+            <p class="card-text">@element.Description</p>
+            <p class="card-text">@element.PublicationDate.ToString("dd-MM-yyyy HH:mm:ss")</p>
+            @*<a href="#" class="btn btn-primary" role="button"></a>*@
+        </div>
+    </div>
+    }
+    @if(Model.Count==0){
+        <h5>No post available</h5>
+    }

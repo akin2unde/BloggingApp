@@ -1,0 +1,32 @@
+﻿@model List<BloggingApp.Models.Blog>
+@using Microsoft.AspNetCore.Identity;
+
+@inject BloggingDBContext DBContext;
+@inject SignInManager<BloggingApp.Models.AppUser> SignInManager
+@{
+}
+<a class="btn btn-primary" role="button" href="Blog/NewPost">Add New</a>
+@if (DBContext.Users.FirstOrDefault(f => f.MailAddress == User.Identity.Name)!=null && DBContext.Users.FirstOrDefault(f => f.MailAddress == User.Identity.Name).IsAdmin)
+{
+    <a class="btn btn-primary" role="button" href="Blog/Upload">Upload</a>
+}
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Publish Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (var i = 0; i < Model.Count; i++)
+        {
+            var element = Model[i];
+            <tr>
+                <td>@element.Title</td>
+                <td>@element.Description</td>
+                <td>@element.PublicationDate.ToString("dd-MM-yyyy HH:mm:ss")</td>
+            </tr>
+        }
+    </tbody>
+</table>
